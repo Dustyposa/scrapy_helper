@@ -23,6 +23,9 @@ class MongoSavePipeline(object):
         if isinstance(item, LianJiaItem):
             if not col.find_one({"level_two_url": item["level_two_url"]}):
                 col.insert_one(dict(item))  # save into database
+        else:
+            if not col.find_one({"source_url": item["source_url"]}):
+                col.insert_one(dict(item))  # save into database
         return item
 
     def __init__(self, mongo_host, mongo_port, mongo_col):
