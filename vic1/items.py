@@ -25,7 +25,7 @@ class LianJiaItem(Item):
     # level_one
     property_name = Field()  # 楼盘名
     price = Field()  # 在售均价
-    sell_set = Field()  # 卖出套数
+    sell_set = Field()  # 在售套数
     renting_set = Field()  # 在租套数
     plate_name = Field()  # 板块名
     level_one_page_data = Field()

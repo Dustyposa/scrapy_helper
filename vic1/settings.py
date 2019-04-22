@@ -91,7 +91,7 @@ HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
 
 
 # others settings
-CITY_AREAS_LIST = ["chenghua", "jinniu", "jinjiang"]
+CITY_AREAS_LIST = ["chenghua", "jinniu", "jinjiang", "qingyang"]
 
 # database
 MONGO_HOST = "127.0.0.1"
