@@ -66,9 +66,14 @@ class XZLItem(Item):
     office_building_name = Field()
     property_level = Field()
     building_time = Field()
-    rent_cost = Field()
-    price = Field()
+    rent_price = Field()
     address = Field()
+    rent_way = Field()
+    sell_price = Field()
+    total_floors = Field()  # 总楼层数
+    total_build_area = Field()  # 总楼层数
+    standard_floor_area = Field()  # 标准层面积
+    property_management_fees = Field()  # 物管费
 
     # base
     crawl_date = Field()  # 抓取日期

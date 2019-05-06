@@ -4,6 +4,7 @@
 #
 # Don't forget to add your pipeline to the ITEM_PIPELINES setting
 # See: https://doc.scrapy.org/en/latest/topics/item-pipeline.html
+from datetime import datetime
 import pymongo
 
 from vic1.items import LianJiaItem
@@ -19,7 +20,7 @@ class MongoSavePipeline(object):
         )
 
     def process_item(self, item, spider):
-        col = self.saver[item["source"]]
+        col = self.saver[f'{item["source"]}{datetime.date(datetime.now())}']
         if isinstance(item, LianJiaItem):
             if not col.find_one({"level_two_url": item["level_two_url"]}):
                 col.insert_one(dict(item))  # save into database
