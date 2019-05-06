@@ -15,12 +15,20 @@ class FtxSpider(scrapy.Spider):
     def parse_one(self, response):
         base = response.css(".nl_con.clearfix li .nlc_details")
         for single in base:
-            item = FangTianXiaItem()
-            property_name = single.css(".nlcd_name a::text").extract_first()  # 楼盘名
-            price = single.css(".nhouse_price span::text").extract_first()
-            print(property_name, "pro")
-            item["property_name"] = property_name.strip()
-            item["price"] = price
-            item["source"] = self.name
-            item["source_url"] = response.url
-            yield item
+            next_url = single.css(".nlcd_name").xpath("./a/@href").extract_first()
+
+            yield Request(url=next_url, callback=self.parse_two)
+
+    def parse_two(self, response):
+        next_url = response.css("#orginalNaviBox").xpath("./a[2]/@href")
+        yield response.follow(next_url, callback=self.parse_three)
+
+    def parse_three(self, response):
+        item = FangTianXiaItem()
+        property_name = response.css("h1 a::text").extract_first()  # 楼盘名
+        price = response.css(".main-info-price em::text").re(r"\d+")  # 价格
+        item["property_name"] = property_name.strip()
+        item["price"] = price
+        item["source"] = self.name
+        item["source_url"] = response.url
+        yield item
