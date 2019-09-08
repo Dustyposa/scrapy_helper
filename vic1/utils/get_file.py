@@ -1,6 +1,7 @@
 import csv
+from datetime import datetime
 
-from db_helper import MongoHelper
+from vic1.utils.db_helper import MongoHelper
 
 
 class SomeConfigs:
@@ -16,7 +17,7 @@ class SomeConfigs:
                           "buildings_num": "楼栋总数", "house_num": "房屋总数(户)", "address": "地址", "source_url": "原始地址",
                           "property_time": "产权年限"}
 
-    HOURSE_NAME = {"xzl": CDXZL_FIELDS, "lianjia": LIANJIA_FIELDS, "ftx": FANGTIANXIA_FIELDS}
+    HOURSE_NAME = {"lianjia": LIANJIA_FIELDS, "ftx": FANGTIANXIA_FIELDS, "xzl": CDXZL_FIELDS}
 
 
 class FileHelper:
@@ -36,13 +37,26 @@ class FileHelper:
         ...
 
 
+class CSVHelper:
+    def __init__(self, filename: str):
+        self.__fp = open(filename, "a", newline="", encoding="utf_8_sig")
+        self.writer = csv.writer(self.__fp)
+
+    def append(self, data: tuple or list):
+        self.writer.writerow(data)
+
+    def __del__(self):
+        self.__fp.close()
+
+
 if __name__ == '__main__':
+    ...
     mon = MongoHelper()
     fler = FileHelper()
-    c_name = "ftx"
-
+    c_name = "lianjia"
+    mon.db_cli = mon.cli["house" + datetime.now().strftime("%Y%m%d")]
     data = mon.db_cli[c_name].find()
-    file_name = f"{c_name}.csv"
+    file_name = f"{c_name + datetime.now().strftime('%Y%m%d')}.csv"
     with open(file_name, "w", newline="", encoding="utf_8_sig") as f:
         field = SomeConfigs.HOURSE_NAME[c_name]
         writer = csv.DictWriter(f, field.values())
@@ -51,3 +65,4 @@ if __name__ == '__main__':
             writer.writerow({field[k]: i[k] for k in field})
 
     print("写入csv成功")
+

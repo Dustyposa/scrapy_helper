@@ -6,7 +6,6 @@
 # https://doc.scrapy.org/en/latest/topics/spider-middleware.html
 
 from scrapy import signals
-from fake_useragent import UserAgent
 
 
 class Vic1SpiderMiddleware(object):
@@ -105,7 +104,6 @@ class Vic1DownloaderMiddleware(object):
 
 
 class RandomUserAgent:
-    usa = UserAgent()
     @classmethod
     def from_crawler(cls, crawler):
         # This method is used by Scrapy to create your spiders.
@@ -117,9 +115,7 @@ class RandomUserAgent:
         # Called for each request that goes through the downloader
         # middleware.
 
-        ua = self.usa.random
-        if ua:
-            request.headers.setdefault('User-Agent', ua)
+        request.headers.setdefault('User-Agent', "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36")
 
     def process_response(self, request, response, spider):
         # Called with the response returned from the downloader.

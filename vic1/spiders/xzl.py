@@ -8,7 +8,7 @@ from vic1.items import FangTianXiaItem, XZLItem
 class XzlSpider(scrapy.Spider):
     name = 'xzl'
     start_url = "http://info.028office.com/building/{}/"
-    areas = ["qingyang", "jinniu", "chenghua", "jinjiang"]
+    areas = ["pixian"]
 
     def start_requests(self):
         for area in self.areas:

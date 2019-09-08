@@ -7,7 +7,8 @@ from vic1.items import FangTianXiaItem
 
 class FtxSpider(scrapy.Spider):
     name = 'ftx'
-    start_urls = "https://cd.newhouse.fang.com/house/s/qingyang/?ctm=1.cd.xf_search.lpsearch_area.2"
+    # start_urls = "https://cd.newhouse.fang.com/house/s/piduqu/?ctm=1.cd.xf_search.lpsearch_area.2"
+    start_urls = "https://cd.newhouse.fang.com/house/s/doujiangyan1/?ctm=1.cd.xf_search.lpsearch_area.18"
 
     def start_requests(self):
         yield Request(url=self.start_urls, callback=self.parse_one)

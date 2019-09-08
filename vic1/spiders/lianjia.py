@@ -2,8 +2,8 @@
 import scrapy
 from scrapy import Request
 
-from ..settings import CITY_AREAS_LIST
-from ..items import LianJiaItem
+from vic1.settings import CITY_AREAS_LIST
+from vic1.items import LianJiaItem
 
 
 class LjSpider(scrapy.Spider):
@@ -11,7 +11,8 @@ class LjSpider(scrapy.Spider):
     start_urls = 'https://cd.lianjia.com/xiaoqu/'
     page = 1
     flag = True
-    base_url = start_urls + CITY_AREAS_LIST[3] + "/pg{}"
+    # base_url = start_urls + CITY_AREAS_LIST[3] + "/pg{}"
+    base_url = start_urls + "doujiangyan" + "/pg{}"
 
     def start_requests(self):
 

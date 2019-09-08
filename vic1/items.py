@@ -74,6 +74,7 @@ class XZLItem(Item):
     total_build_area = Field()  # 总楼层数
     standard_floor_area = Field()  # 标准层面积
     property_management_fees = Field()  # 物管费
+    # rent_way = Field()  #
 
     # base
     crawl_date = Field()  # 抓取日期

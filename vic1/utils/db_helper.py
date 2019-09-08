@@ -1,8 +1,8 @@
 import pymongo
 
-from configs import (MONGO_PORT,
-                     MONGO_HOST,
-                     MONGO_DB_NAME)
+from vic1.utils.configs import (MONGO_PORT,
+                                MONGO_HOST,
+                                MONGO_DB_NAME)
 
 
 class MongoHelper:
